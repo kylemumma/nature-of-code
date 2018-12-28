@@ -1,6 +1,6 @@
-int numOfWalkers = 75;
+int numOfWalkers = 100;
 int iterationsPerFrame = 5;
-double squareHypot;
+float walkerDiameter;
 
 ArrayList<Walker> walkers;
 ArrayList<Walker> aggregate;
@@ -8,7 +8,7 @@ ArrayList<Walker> aggregate;
 
 void setup() {
   
-  size(600, 600);
+  size(800, 800);
   
   //setup walkers
   walkers = new ArrayList<Walker>();
@@ -21,35 +21,36 @@ void setup() {
   aggregate.add(new Walker(width/2, height/2));
   
   //establish squareHypot(diagonal size of square)
-  squareHypot = Math.hypot(walkers.get(0).size, walkers.get(0).size);
+  walkerDiameter = walkers.get(0).diameter;
 }
 
 void draw() {
   background(255);
   
-  //update walkers
+  //update walkers and process collisions
   for(int i = 0; i < iterationsPerFrame; i++){
     for(Walker w : walkers){
       w.walk();
+    
+      for(int j = aggregate.size() - 1; j >= 0; j--){
+        double dx = w.pos.x - aggregate.get(j).pos.x;
+        double dy = w.pos.y - aggregate.get(j).pos.y;
+        double dist = Math.hypot(dx, dy);
+        
+        if(dist <= walkerDiameter){
+          aggregate.add(new Walker(w.pos.x, w.pos.y));
+          w.resetPos();
+        }
+      }
     }
   }
   
-  //process collisions and show
+  //show walkers
   fill(0);
   for(Walker w : walkers){
-    for(int i = aggregate.size() - 1; i >= 0; i--){
-      double dx = w.pos.x - aggregate.get(i).pos.x;
-      double dy = w.pos.y - aggregate.get(i).pos.y;
-      double dist = Math.hypot(dx, dy);
-      
-      if(dist < squareHypot){
-        aggregate.add(new Walker(w.pos.x, w.pos.y));
-        w.resetPos();
-      }
-    }
-    
     w.show();
   }
+  
   
   //show aggregate
   fill(255, 0, 0);

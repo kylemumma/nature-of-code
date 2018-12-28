@@ -1,5 +1,5 @@
 class Walker {
-  int size = 5;
+  float diameter = 10;
   PVector pos;
   
   Walker(float x, float y) {
@@ -34,14 +34,15 @@ class Walker {
   void walk() {
     //move
     double r = random(1);
+    double dist = random(diameter/2, diameter);
     if(r < 0.25) {
-      pos.x += size;
+      pos.x += dist;
     } else if(r < 0.5) {
-      pos.x -= size;
+      pos.x -= dist;
     } else if(r < 0.75) {
-      pos.y += size;
+      pos.y += dist;
     } else {
-      pos.y -= size;
+      pos.y -= dist;
     }
     
     //out of bounds
@@ -61,6 +62,6 @@ class Walker {
   void show() {
     noStroke();
     
-    rect(pos.x, pos.y, size, size);
+    ellipse(pos.x, pos.y, diameter, diameter);
   }
 }
