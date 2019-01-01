@@ -1,4 +1,4 @@
-int numOfWalkers = 100;
+int numOfWalkers = 50;
 int iterationsPerFrame = 5;
 float walkerDiameter;
 
@@ -8,7 +8,7 @@ ArrayList<Walker> aggregate;
 
 void setup() {
   
-  size(800, 800);
+  size(600, 600);
   
   //setup walkers
   walkers = new ArrayList<Walker>();
