@@ -17,12 +17,17 @@ class Ball{
    //setting acceleration towards mouse
    PVector mouse = new PVector(mouseX, mouseY);
    mouse.sub(position);
-   mouse.setMag(0.05);
+   mouse.setMag(0.4);
    acceleration = mouse;
    
    //acceleration is greater to closer the ball is to the mouse
-   acceleration.mult((float)Math.pow(0.995, distanceFromBallToMouse.mag() - 500) + 0.6);
+   //linear relationship
+   acceleration.mult(-0.008 * distanceFromBallToMouse.mag() + 10);
    
+   //exponential relationship
+   //acceleration.mult((float)Math.pow(0.995, distanceFromBallToMouse.mag() - 500) + 0.6);
+   
+   velocity.limit(20);
    velocity.add(acceleration);
    position.add(velocity);
 
