@@ -6,7 +6,7 @@ void setup() {
    balls = new Mover[8];
    for(int i = 0; i < balls.length; i++){
      float ballX = random(RADIUS+ 10 , width-RADIUS-50);
-     float ballRadius = random(5, 30);
+     float ballRadius = random(10, 30);
      float ballY = ballRadius;//random(RADIUS, height-RADIUS-50);
      balls[i] = new Mover(ballX, ballY, ballRadius);
    }
