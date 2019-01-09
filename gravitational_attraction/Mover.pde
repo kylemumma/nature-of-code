@@ -6,13 +6,15 @@ class Mover {
   float mass;
   float radius;
   
+  float G = 1;
+  
   Mover() {
     location = new PVector(width/2, height/2);
     velocity = new PVector(5, 0);
     acceleration = new PVector(0, 0);
     
-    this.mass = 1;
     this.radius = 10;
+    this.mass = radius*3;
   }
   
   Mover(float x, float y, float radius, boolean startsRight) {
@@ -21,7 +23,7 @@ class Mover {
     acceleration = new PVector(0, 0);
     
     this.radius = radius;
-    this.mass = radius * 2;
+    this.mass = radius * 3;
     
     if(!startsRight){
       velocity.x *= -1;
@@ -34,7 +36,7 @@ class Mover {
     acceleration = new PVector(0, 0);
     
     this.radius = 10;
-    this.mass = radius * 2;
+    this.mass = radius * 3;
   }
   
   void checkEdges(){
@@ -76,6 +78,24 @@ class Mover {
     //static version of divide so it doesnt mess up force object
     PVector appliedForce = PVector.div(f, mass);
     acceleration.add(appliedForce);
+  }
+  
+  PVector attract(Mover mover){
+    //direction of force
+    PVector force = PVector.sub(location, mover.location);
+    
+    float distance = force.mag();
+    distance = constrain(distance, 5, 25);
+    
+    force.normalize();
+    
+    //magnitude of force
+    float strength = (G * mass * mover.mass) / (distance*distance);
+    
+    //putting magnitude and dir together
+    force.mult(strength);
+    
+    return force;
   }
   
   void update(){

@@ -5,12 +5,14 @@ class Attractor {
   float radius;
   float G;
   
+  boolean dragging = false;
+  
   Attractor() {
     location = new PVector(width/2, height/2);
     
-    this.G = 1;
+    this.G = 0.75;
     this.radius = 40;
-    this.mass = 80;
+    this.mass = radius*3;
   }
   
   Attractor(float x, float y, float radius) {
@@ -18,7 +20,7 @@ class Attractor {
     
     this.G = 1;
     this.radius = radius;
-    this.mass = radius * 2;
+    this.mass = radius * 3;
   }
   
   Attractor(float radius) {
@@ -26,10 +28,15 @@ class Attractor {
     
     this.G = 1;
     this.radius = radius;
-    this.mass = radius * 2;
+    this.mass = radius * 3;
   }
   
   PVector attract(Mover mover){
+    if(dragging){
+      location.x = mouseX;
+      location.y = mouseY;
+    }
+    
     //direction of force
     PVector force = PVector.sub(location, mover.location);
     
@@ -47,9 +54,24 @@ class Attractor {
     return force;
   }
   
+  void clicked(int mx, int my){
+    float distance = dist(mx, my, location.x, location.y);
+    if(distance < radius){
+      dragging = true;
+    }
+  }
+  
+  void stopDragging(){
+    dragging = false;
+  }
+  
   void show(){
     stroke(0);
-    fill(150);
+    if(dragging){
+      fill(100);
+    } else {
+      fill(150);
+    }
     ellipse(location.x, location.y, radius*2, radius*2);
   }
 }
