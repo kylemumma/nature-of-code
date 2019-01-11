@@ -11,15 +11,16 @@ void setup(){
 void draw(){
   background(255);
   
+  //check if colliding with food
+  food.checkColliding(prey);
+  
   //apply force in direction of food
   PVector forceTowardsFood = PVector.sub(food.position, prey.position);
   forceTowardsFood.normalize();
   prey.applyForce(forceTowardsFood);
   
-  //check if colliding with food
-  food.checkColliding(prey);
-  
   //move
+  food.update();
   prey.update();
   
   //show

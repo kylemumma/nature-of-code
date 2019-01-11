@@ -17,7 +17,7 @@ class Prey {
   }
   
   void update(){
-    velocity.limit(7);
+    velocity.limit(5);
     
     velocity.add(acceleration);
     position.add(velocity);
