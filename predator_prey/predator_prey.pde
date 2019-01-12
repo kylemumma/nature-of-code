@@ -5,7 +5,7 @@ void setup(){
   size(800, 800);
   
   food = new Food();
-  prey = new Prey();
+  prey = new Prey(); 
 }
 
 void draw(){
@@ -19,11 +19,23 @@ void draw(){
   forceTowardsFood.normalize();
   prey.applyForce(forceTowardsFood);
   
+  pushMatrix();
+  translate(prey.position.x, prey.position.y);
+  
+  float rotateAngle = atan(prey.acceleration.y / prey.acceleration.x);
+  if(food.position.x < prey.position.x){
+    rotateAngle = PI + rotateAngle;
+  }
+  
+  rotate(rotateAngle);
+  fill(100);
+  triangle(-25, 20, -25, -20, 40, 0);
+  popMatrix();
+  
   //move
   food.update();
   prey.update();
   
   //show
-  prey.show();
   food.show();
 }

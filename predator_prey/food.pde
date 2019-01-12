@@ -18,7 +18,6 @@ class Food {
     PVector dist = PVector.sub(position, object.position);
     if(dist.mag() < radius + object.radius){
       setRandomPosition();
-      prey.radius+=1;
     }
   }
   

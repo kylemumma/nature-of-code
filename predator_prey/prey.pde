@@ -3,7 +3,7 @@ class Prey {
   PVector velocity;
   PVector acceleration;
   
-  float radius = 20;
+  float radius = 25;
   float mass = 1;
   
   Prey(){
