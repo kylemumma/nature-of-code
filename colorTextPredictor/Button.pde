@@ -34,4 +34,13 @@ class Button {
     fill(textColor);
     text(word, position.x - (40) + (xwidth/2), position.y + (yheight/2));
   }
+  
+  void showExit() {
+    fill(backgroundColor);
+    rect(position.x, position.y, xwidth, yheight);
+    
+    textSize(32);
+    fill(textColor);
+    text(word, position.x - (90) + (xwidth/2), position.y + 10 + (yheight/2));
+  }
 }
