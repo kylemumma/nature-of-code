@@ -49,13 +49,13 @@ void mouseReleased(){
   whiteButton.setBGColor(currentColor);
   
   if(blackClicked){
-    output.println((int)red(currentColor) + " " + (int)green(currentColor) + " " + (int)blue(currentColor) + " 0");
+    output.println("{" + red(currentColor)/255 + ", " + green(currentColor)/255 + ", " + blue(currentColor)/255 + "}, {0},");
     currentColor = color((int)random(256), (int)random(256), (int)random(256));
     blackButton.setBGColor(currentColor);
     whiteButton.setBGColor(currentColor);
     blackClicked = false;
   } else if(whiteClicked){
-    output.println((int)red(currentColor) + " " + (int)green(currentColor) + " " + (int)blue(currentColor) + " 1");
+    output.println("{" + red(currentColor)/255 + ", " + green(currentColor)/255 + ", " + blue(currentColor)/255 + "}, {1},");
     currentColor = color((int)random(256), (int)random(256), (int)random(256));
     blackButton.setBGColor(currentColor);
     whiteButton.setBGColor(currentColor);
